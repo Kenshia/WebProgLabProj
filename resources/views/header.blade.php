@@ -13,12 +13,28 @@
 
 <header>
     <div style="background-color:white; padding-top: 10px; padding-bottom: 10px">
-        <div class="d-flex justify-content-start">
-            <div class="p-3 align-self-center">
-                <h2>Barbatos Shop</h2>
+        <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-start">
+                <div class="p-3 align-self-center">
+                    <a href="/" style="text-decoration:none; color:black">
+                        <h2>Barbatos Shop</h2>
+                    </a>
+                </div>
+                <div class="p-3 align-self-center">
+                    Header Stuffs
+                </div>
             </div>
-            <div class="p-3 align-self-center">
-                Header Stuffs
+            <div class="d-flex justify-content-end">
+                <div class="p-3 align-self-center">
+                    @if (Auth::check())
+                        Logout
+                    @else
+                        <a href="/login" style="text-decoration:none; color:black">Login</a>
+                    @endif
+                </div>
+                <div class="p-3 align-self-center">
+                    Cart?
+                </div>
             </div>
         </div>
     </div>

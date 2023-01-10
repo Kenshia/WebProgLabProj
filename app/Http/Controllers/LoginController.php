@@ -18,7 +18,11 @@ class LoginController extends Controller
 
     function postLogin(Request $request)
     {
-        // Auth::attempt(['email' => $email, 'password' => $password]);
+        $credientials = ['email' => $request->email, 'password' => $request->password];
+        if (!Auth::attempt($credientials, $request->rememberme)) {
+            $auth_failed = true;
+            return view('login')->with(compact('auth_failed'));
+        }
         return redirect('/home');
     }
 

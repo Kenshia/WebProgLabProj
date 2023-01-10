@@ -18,6 +18,12 @@
                 <center>
                     <button type="submit" style="width: 50%; margin-top: 5%">Login</button>
                 </center>
+
+                @if (!empty($auth_failed))
+                    <div style="color:red">
+                        Incorrect email or password
+                    </div>
+                @endif
             </div>
         </form>
     </center>
