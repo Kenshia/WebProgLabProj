@@ -18,10 +18,10 @@ composer install
 ```
 cp .env.example .env
 ```
-- Create a new database named `lab-final-project` (name is subject to change) or use any existing database in your database software.
+- Create a new database named `barbatos_shop` or use any existing database in your database software.
 - Open .env file and config the database variables. Default configuration is shown below:
 ```
-DB_DATABASE=lab-final-project
+DB_DATABASE=barbatos_shop
 DB_USERNAME=root
 DB_PASSWORD=
 ```
