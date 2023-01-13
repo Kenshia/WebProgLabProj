@@ -10,7 +10,7 @@
                 <label style="text-align:left; margin-left:2%;">Email</label>
                 <input type="text" name="email" style="margin:2%">
                 <label style="text-align:left; margin-left:2%;">Password</label>
-                <input type="text" name="password" style="margin:2%">
+                <input type="password" name="password" style="margin:2%">
                 <div class="d-flex" style="margin-left: 2%">
                     <input type="checkbox" name="rememberme" id="rememberme">
                     <label style="margin-left: 1%; padding-bottom:3px"> Remember Me</label>
