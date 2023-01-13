@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,16 +28,43 @@ class LoginController extends Controller
         return redirect('/home');
     }
 
+    function logout()
+    {
+        Auth::logout();
+        return redirect('/home');
+    }
+
     function getRegister()
     {
         if (Auth::check())
             return redirect('/home');
-        // return view('register');
+        $_countries = Country::all()->toArray();
+        $countries = array_column($_countries, 'name');
+        return view('register')->with(compact('countries'));
     }
 
-    function postRegister()
+    function postRegister(Request $request)
     {
-        // Create data using model, insert/save it
-        // return redirect('/login');
+        $request->validate([
+            'name' => 'required|min:5',
+            'email' => 'required|unique:users|email:rfc,dns',
+            'password' => 'required|min:8|alpha_num|required_with:confirmPassword|same:confirmPassword',
+            'confirmPassword' => 'required|min:8',
+            'gender' => 'required|in:Male,Female',
+            'dob' => 'required|date|after:2020-01-01|before:today',
+            'country' => 'required|not_in:Country'
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'gender' => $request->gender,
+            'dob' => $request->dob,
+            'country' => $request->country,
+            'privilege' => 'User'
+        ]);
+
+        return redirect('/login');
     }
 }

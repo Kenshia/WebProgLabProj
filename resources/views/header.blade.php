@@ -27,9 +27,9 @@
             <div class="d-flex justify-content-end">
                 <div class="p-3 align-self-center">
                     @if (Auth::check())
-                        Logout
+                        {{ Auth::user()->name }} | <a href="/logout">Logout</a>
                     @else
-                        <a href="/login" style="text-decoration:none; color:black">Login</a>
+                        <a href="/login" style="text-decoration:none">Login</a>
                     @endif
                 </div>
                 <div class="p-3 align-self-center">
