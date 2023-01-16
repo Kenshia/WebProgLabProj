@@ -6,6 +6,7 @@ use App\Models\Country;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class LoginController extends Controller
 {
@@ -21,9 +22,13 @@ class LoginController extends Controller
     function postLogin(Request $request)
     {
         $credientials = ['email' => $request->email, 'password' => $request->password];
-        if (!Auth::attempt($credientials, $request->rememberme)) {
+        if (!Auth::attempt($credientials)) {
             $auth_failed = true;
             return view('login')->with(compact('auth_failed'));
+        }
+        if ($request->rememberme) {
+            Cookie::queue('email', $credientials['email'], 120); //2 hours
+            Cookie::queue('password', $credientials['password'], 120);
         }
         return redirect('/home');
     }

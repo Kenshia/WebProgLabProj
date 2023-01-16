@@ -9,16 +9,29 @@
                 <div class="text-center" style="padding-top: 2%; padding-bottom:2%">
                     <h1>Login</h1>
                 </div>
-                <div class="form-outline mb-4">
-                    <input type="email" name="email" class="form-control" placeholder="Email address" />
-                </div>
-                <div class="form-outline mb-4">
-                    <input type="password" name="password" class="form-control" placeholder="Password" />
-                </div>
+
+                @if (Cookie::get('email') !== null)
+                    <div class="form-outline mb-4">
+                        <input type="email" name="email" class="form-control" placeholder="Email address"
+                            value="{{ Cookie::get('email') }}" />
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="password" name="password" class="form-control" placeholder="Password"
+                            value="{{ Cookie::get('password') }}" />
+                    </div>
+                @else
+                    <div class="form-outline mb-4">
+                        <input type="email" name="email" class="form-control" placeholder="Email address" />
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="password" name="password" class="form-control" placeholder="Password" />
+                    </div>
+                @endif
+
                 <div class="row mb-4">
                     <div class="col d-flex justify-content-center">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="rememberme" checked />
+                            <input class="form-check-input" type="checkbox" name="rememberme" checked />
                             Remember me
                         </div>
                     </div>
