@@ -19,11 +19,7 @@
                             <div class="card" style="width: 20rem; height: 20rem; margin-left:1%; margin-right:1%">
                                 <img class="card-img-top" src="{{ $item->image }}" alt="Card image cap">
                                 <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the
-                                        bulk
-                                        of
-                                        the
-                                        card's content.</p>
+                                    <p class="card-text"> {{ $item->detail }}</p>
                                 </div>
                             </div>
                         @endforeach
