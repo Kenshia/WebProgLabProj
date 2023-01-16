@@ -14,12 +14,13 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+        $category = ProductCategory::randomCategory();
         return [
             'name' => $this->faker->name(),
-            'category' => ProductCategory::randomCategoryId(),
+            'category' => $category->id,
             'detail' => $this->faker->text(),
             'price' => $this->faker->numberBetween(10, 100000) * 100,
-            'image' => 'image' .  (string)$this->faker->numberBetween(1, 10) . 'png'
+            'image' => 'storage/DUMMY_IMAGE_' . strtoupper($category->name) . '_' .  (string)$this->faker->numberBetween(1, 3) . '.png'
         ];
     }
 }
