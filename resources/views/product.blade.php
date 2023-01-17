@@ -17,12 +17,12 @@
                         <p class="">{{ $product->detail }}</p>
 
                         @if (Auth::check() && Auth::user()->privilege == 'User')
-                            <form action="/purchase" method="post">
+                            <form action="/addToCart" method="post">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
                                 <input type="hidden" name="productId" value="{{ $product->id }}">
                                 <input type="number" name="qty" id="qty" min="0">
-                                <button type="submit">Purchase</button>
+                                <button type="submit">Add to Cart</button>
                             </form>
                         @endif
                     </div>

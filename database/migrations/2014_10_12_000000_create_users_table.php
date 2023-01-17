@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->date('dob');
             $table->string('country');
             $table->string('privilege');
+            $table->text('cart')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

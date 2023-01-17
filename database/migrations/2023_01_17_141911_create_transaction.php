@@ -13,10 +13,10 @@ class CreateTransaction extends Migration
      */
     public function up()
     {
-        Schema::create('transaction', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('purhcase_history_id');
-            $table->foreign('purhcase_history_id')->references('id')->on('purchase_histories')->onDelete('cascade');
+            $table->unsignedBigInteger('purchase_history_id');
+            $table->foreign('purchase_history_id')->references('id')->on('purchase_histories')->onDelete('cascade');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->integer('qty');

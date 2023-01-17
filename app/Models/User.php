@@ -24,7 +24,8 @@ class User extends Authenticatable
         'gender',
         'dob',
         'country',
-        'privilege'
+        'privilege',
+        'cart'
     ];
 
     /**
@@ -49,5 +50,27 @@ class User extends Authenticatable
     public function purchaseHistory()
     {
         return $this->hasMany(PurchaseHistory::class);
+    }
+
+    public function getCartItems()
+    {
+        if (empty($this->cart)) return "";
+
+        $cart = explode(';', $this->cart);
+
+        $result = [];
+
+        foreach ($cart as $item) {
+            if (empty($item)) continue;
+
+            $item = explode(':', $item);
+            $productId = $item[0];
+            $product = Product::find($productId);
+            $qty = $item[1];
+
+            $result[$productId] = ['product' => $product, 'qty' => $qty];
+        }
+
+        return $result;
     }
 }

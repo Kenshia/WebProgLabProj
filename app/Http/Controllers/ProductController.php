@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\PurchaseHistory;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,13 +14,89 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     //
+    function addToCart(Request $request)
+    {
+        if (Auth::user()->id != $request->userId || $request->qty <= 0)
+            return redirect('/home');
+
+        $user = User::find($request->userId);
+        $cart = explode(';', $user->cart);
+
+        $index = -1;
+        for ($i = 0; $i < count($cart); $i++) {
+            if (strstr($cart[$i], $request->productId . ':')) {
+                $index = $i;
+                break;
+            }
+        }
+        if ($index == -1)
+            $user->cart = $user->cart . $request->productId . ':' . $request->qty . ';';
+        else {
+            $item = explode(':', $cart[$index]);
+            $id = $item[0];
+            $qty = $item[1];
+            $qty = (int) $qty;
+            $qty = $qty + $request->qty;
+            $cart[$index] = $item[0] . ':' . $qty;
+            $user->cart = join(';', $cart);
+        }
+        $user->save();
+
+        return redirect('/home');
+    }
+
+    function removeFromCart(Request $request)
+    {
+        if (!Auth::check()) return redirect('/home');
+
+        $productId = $request->route('id');
+        $user = User::find(Auth::user()->id);
+        $cart = explode(';', $user->cart);
+
+        $index = -1;
+        for ($i = 0; $i < count($cart); $i++) {
+            if (strstr($cart[$i], $productId . ':')) {
+                $index = $i;
+                break;
+            }
+        }
+        if ($index == -1) return redirect('/cart');
+        unset($cart[$index]);
+
+        $user->cart = join(';', $cart);
+        $user->save();
+
+        return redirect('/cart');
+    }
+
     function purchase(Request $request)
     {
-        PurchaseHistory::create([
+        if (Auth::user()->id != $request->userId || empty(Auth::user()->cart))
+            return redirect('/home');
+
+        $purchaseHistory = PurchaseHistory::create([
             'user_id' => $request->userId,
-            'product_id' => $request->productId,
-            'qty' => $request->qty
         ]);
+
+        $user = User::find($request->userId);
+        $cart = explode(';', $user->cart);
+
+        foreach ($cart as $item) {
+            if (empty($item)) continue;
+
+            $item = explode(':', $item);
+            $productId = $item[0];
+            $qty = $item[1];
+
+            Transaction::create([
+                'purchase_history_id' => $purchaseHistory->id,
+                'product_id' => $productId,
+                'qty' => $qty
+            ]);
+        }
+
+        $user->cart = "";
+        $user->save();
 
         return redirect('/home');
     }
@@ -122,11 +199,19 @@ class ProductController extends Controller
     //
     function cart()
     {
-        return view('cart');
+        if (!Auth::check())
+            return redirect('/home');
+        return view('cart', [
+            'user' => Auth::user()
+        ]);
     }
 
     function history()
     {
-        return view('history');
+        if (!Auth::check())
+            return redirect('/home');
+        return view('history', [
+            'purchaseHistory' => User::find(Auth::user()->id)->purchaseHistory()
+        ]);
     }
 }

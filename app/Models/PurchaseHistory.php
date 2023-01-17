@@ -20,8 +20,26 @@ class PurchaseHistory extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function transactions()
+    public function items()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function getTotalQty()
+    {
+        $sum = 0;
+        foreach ($this->items as $item) {
+            $sum += $item->qty;
+        }
+        return $sum;
+    }
+
+    public function getTotalPrice()
+    {
+        $sum = 0;
+        foreach ($this->items as $item) {
+            $sum += $item->qty * $item->product->price;
+        }
+        return $sum;
     }
 }

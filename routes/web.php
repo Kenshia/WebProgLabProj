@@ -40,7 +40,9 @@ Route::middleware('admin')->group(function () {
     });
 });
 Route::post('/purchase', [ProductController::class, 'purchase']);
+Route::post('/addToCart', [ProductController::class, 'addToCart']);
 Route::get('/cart', [ProductController::class, 'cart']);
+Route::get('/removeFromCart/{id}', [ProductController::class, 'removeFromCart']);
 Route::get('/history', [ProductController::class, 'history']);
 
 Route::get('/register', [LoginController::class, 'getRegister']);
