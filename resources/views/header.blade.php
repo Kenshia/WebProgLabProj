@@ -21,7 +21,7 @@
                     </a>
                 </div>
                 <div class="d-flex justify-content-between p-3 align-self-center" style="width:max">
-                    <form class="form-inline" action="/search" method="POST">
+                    <form class="form-inline" action="/search" method="get">
                         <input class="form-control" type="search" placeholder="Search" name="name" id="name">
                     </form>
                 </div>

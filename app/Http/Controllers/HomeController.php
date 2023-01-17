@@ -45,16 +45,17 @@ class HomeController extends Controller
 
     function search(Request $request)
     {
-        $name = $request->route('name');
-        $result = Product::all()->where('name', 'LIKE', '%' . $name . '%');
-        //$result = DB::table('products')->where('name', 'LIKE', '%' . $name . '%');
-        ddd($name);
+        $name = $request->name;
+
+        $products = Product::all(); // laravel doesn't have sql keyword LIKE and % doesn't work, wasted a lot of time there
+        $result = array();
+        foreach ($products as $product) {
+            if (strstr(strtolower($product->name), strtolower($name)))
+                array_push($result, $product);
+        }
         return view('search', [
+            'keyword' => $name,
             'result' => $result
         ]);
-    }
-
-    function getSearch()
-    {
     }
 }
