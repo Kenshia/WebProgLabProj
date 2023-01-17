@@ -137,8 +137,10 @@ class ProductController extends Controller
             'category' => 'filled|not_in:Select a Category',
             'detail' => 'filled',
             'price' => 'filled|numeric',
-            'image' => 'mimes:jpeg,png'
+            'image' => 'filled|mimes:jpeg,jpg,png'
         ]);
+        // for some reason the enctype="multipart/form-data" in the form bypasses the request validation
+        // while not using the enctype will result in wrong format for mimes:jpeg,jpg,png
 
         $imageName = (string)time() . '.' . $request->file('image')->extension();
 
@@ -177,8 +179,10 @@ class ProductController extends Controller
             'category' => 'filled|not_in:Select a Category',
             'detail' => 'filled',
             'price' => 'filled|numeric',
-            'image' => 'mimes:jpeg,png'
+            'image' => 'filled|mimes:jpeg,png'
         ]);
+        // for some reason the enctype="multipart/form-data" in the form bypasses the request validation
+        // while not using the enctype will result in wrong format for mimes:jpeg,jpg,png
 
         $imageName = (string)time() . '.' . $request->file('image')->extension();
 
