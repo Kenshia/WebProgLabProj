@@ -32,9 +32,12 @@ Route::middleware('admin')->group(function () {
     Route::get('/delete/{id}', [ProductController::class, 'delete']);
 });
 Route::post('/purchase', [ProductController::class, 'purchase']);
+Route::get('/cart', [ProductController::class, 'cart']);
+Route::get('/history', [ProductController::class, 'history']);
 
 Route::get('/register', [LoginController::class, 'getRegister']);
 Route::post('/register', [LoginController::class, 'postRegister']);
 Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/login', [LoginController::class, 'getLogin']);
 Route::post('/login', [LoginController::class, 'postLogin']);
+Route::get('/profile', [LoginController::class, 'profile']);

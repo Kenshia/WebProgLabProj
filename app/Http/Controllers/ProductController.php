@@ -7,6 +7,7 @@ use App\Models\PurchaseHistory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -45,6 +46,8 @@ class ProductController extends Controller
             'image' => 'mimes:jpeg,png'
         ]);
 
+
+
         return redirect('/manage');
     }
 
@@ -60,4 +63,13 @@ class ProductController extends Controller
         return redirect('/manage');
     }
     //
+    function cart()
+    {
+        return view('cart');
+    }
+
+    function history()
+    {
+        return view('history');
+    }
 }
