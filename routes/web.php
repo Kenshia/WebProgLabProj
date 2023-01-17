@@ -25,6 +25,9 @@ Route::get('/product/{id}', [HomeController::class, 'product']);
 Route::get('/search', [HomeController::class, 'getSearch']);
 Route::post('/search', [HomeController::class, 'postSearch']);
 
+Route::get('/manage', [ProductController::class, 'manage']);
+Route::get('/addproduct', [ProductController::class, 'addproduct']);
+Route::get('/update', [ProductController::class, 'update']);
 Route::post('/purchase', [ProductController::class, 'purchase']);
 
 Route::get('/register', [LoginController::class, 'getRegister']);

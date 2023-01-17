@@ -26,4 +26,19 @@ class ProductController extends Controller
     function add(Request $request)
     {
     }
+
+    function manage()
+    {
+        return view('manage');
+    }
+
+    function addproduct()
+    {
+        return view('addproduct');
+    }
+
+    function update()
+    {
+        return view('update');
+    }
 }
