@@ -24,9 +24,13 @@ Route::get('/product', [HomeController::class, 'product']);
 Route::get('/product/{id}', [HomeController::class, 'product']);
 Route::get('/search', [HomeController::class, 'search']);
 
-Route::get('/manage', [ProductController::class, 'manage']);
-Route::get('/addproduct', [ProductController::class, 'addproduct']);
-Route::get('/update', [ProductController::class, 'update']);
+Route::middleware('admin')->group(function () {
+    Route::get('/manage', [ProductController::class, 'manage']);
+    Route::get('/manage/add', [ProductController::class, 'viewAddProduct']);
+    Route::post('/manage/add', [ProductController::class, 'submitAddProduct']);
+    Route::get('/update/{id}', [ProductController::class, 'update']);
+    Route::get('/delete/{id}', [ProductController::class, 'delete']);
+});
 Route::post('/purchase', [ProductController::class, 'purchase']);
 
 Route::get('/register', [LoginController::class, 'getRegister']);

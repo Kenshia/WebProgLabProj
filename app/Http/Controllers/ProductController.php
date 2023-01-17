@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\PurchaseHistory;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -19,26 +22,42 @@ class ProductController extends Controller
         return redirect('/home');
     }
 
-    function edit(Request $request)
-    {
-    }
-
-    function add(Request $request)
-    {
-    }
-
+    // Checked with middleware 'admin'
     function manage()
     {
-        return view('manage');
+        return view('manage', [
+            'products' => Product::all()
+        ]);
     }
 
-    function addproduct()
+    function viewAddProduct()
     {
         return view('addproduct');
+    }
+
+    function submitAddProduct(Request $request)
+    {
+        $request->validate([
+            'name' => 'filled',
+            'category' => 'filled|not_in:Select a Category',
+            'detail' => 'filled',
+            'price' => 'filled|numeric',
+            'image' => 'mimes:jpeg,png'
+        ]);
+
+        return redirect('/manage');
     }
 
     function update()
     {
         return view('update');
     }
+
+    function delete(Request $request)
+    {
+        $id = $request->route('id');
+        Product::destroy($id);
+        return redirect('/manage');
+    }
+    //
 }

@@ -29,13 +29,21 @@
             <div class="d-flex justify-content-end">
                 <div class="p-3 align-self-center">
                     @if (Auth::check())
-                        {{ Auth::user()->name }} | <a href="/logout">Logout</a>
+                        {{ Auth::user()->name }} | <a href="/logout" style="text-decoration: none">Logout</a>
                     @else
                         <a href="/login" style="text-decoration:none">Login</a>
                     @endif
                 </div>
                 <div class="p-3 align-self-center">
-                    Cart?
+                    @if (Auth::check())
+                        @if (Auth::user()->privilege == 'Admin')
+                            <a href="/manage" style="text-decoration: none; color:black">
+                                <button type="button" class="btn btn-secondary">Manage Product</button></a>
+                        @else
+                            <a href="/cart">Cart</a>
+                        @endif
+
+                    @endif
                 </div>
             </div>
         </div>
