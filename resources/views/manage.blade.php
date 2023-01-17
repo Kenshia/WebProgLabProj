@@ -17,10 +17,10 @@
                     <div class="p-2">
                         {{ $product->name }}
                         <div class="d-flex justify-content-around" style="width:50%">
-                            <a href="/edit/{{ $product->id }}"><button type="button"
+                            <a href="/manage/update/{{ $product->id }}"><button type="button"
                                     class="btn btn-info btn-sm">Edit</button></a>
 
-                            <a href="/delete/{{ $product->id }}"><button type="submit"
+                            <a href="/manage/delete/{{ $product->id }}"><button type="submit"
                                     class="btn btn-danger btn-sm">Delete</button></a>
                         </div>
                     </div>

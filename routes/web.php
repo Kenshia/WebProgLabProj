@@ -28,8 +28,16 @@ Route::middleware('admin')->group(function () {
     Route::get('/manage', [ProductController::class, 'manage']);
     Route::get('/manage/add', [ProductController::class, 'viewAddProduct']);
     Route::post('/manage/add', [ProductController::class, 'submitAddProduct']);
-    Route::get('/update/{id}', [ProductController::class, 'update']);
-    Route::get('/delete/{id}', [ProductController::class, 'delete']);
+    Route::get('/manage/update/{id}', [ProductController::class, 'update']);
+    Route::post('/manage/update', [ProductController::class, 'postUpdate']);
+    Route::get('/manage/update', function () {
+        return redirect('/manage');
+    });
+
+    Route::get('/manage/delete/{id}', [ProductController::class, 'delete']);
+    Route::get('/manage/delete', function () {
+        return redirect('/manage');
+    });
 });
 Route::post('/purchase', [ProductController::class, 'purchase']);
 Route::get('/cart', [ProductController::class, 'cart']);

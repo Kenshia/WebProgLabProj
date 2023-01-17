@@ -62,15 +62,61 @@ class ProductController extends Controller
         return redirect('/manage');
     }
 
-    function update()
+    function update(Request $request)
     {
-        return view('update');
+        $id = $request->route('id');
+        $product = Product::find($id);
+        if (!$product) return redirect('/manage');
+
+        $categories = ProductCategory::all();
+        $data = ['product' => $product];
+
+        foreach ($categories as $category)
+            $data[$category->name] = $category->id;
+
+        return view('update', $data);
+    }
+
+    function postUpdate(Request $request)
+    {
+        $request->validate([
+            'name' => 'filled',
+            'category' => 'filled|not_in:Select a Category',
+            'detail' => 'filled',
+            'price' => 'filled|numeric',
+            'image' => 'mimes:jpeg,png'
+        ]);
+
+        $imageName = (string)time() . '.' . $request->file('image')->extension();
+
+        $product = Product::find($request->productId);
+        $oldImage = str_replace("storage", "public", $product->image);
+
+        $product->name = $request->name;
+        $product->product_category_id = ProductCategory::all()->where('name', '=', $request->category)->first()->id;
+        $product->detail = $request->detail;
+        $product->price = $request->price;
+        $product->image = 'storage/' . $imageName;
+        $product->save();
+
+        if (!strstr($oldImage, "DUMMY"))
+            Storage::delete($oldImage);
+        Storage::put('public/' . $imageName, file_get_contents($request->image));
+
+        return redirect('/manage');
     }
 
     function delete(Request $request)
     {
         $id = $request->route('id');
+
+        $imagePath = Product::find($id)->image;
+        $imagePath = str_replace("storage", "public", $imagePath);
+        if (!strstr($imagePath, "DUMMY"))
+            Storage::delete($imagePath);
+
         Product::destroy($id);
+
         return redirect('/manage');
     }
     //

@@ -34,7 +34,7 @@ class HomeController extends Controller
     {
         $id = $request->route('id');
 
-        $product = Product::all()->where('id', '=', $id)->first();
+        $product = Product::find($id);
         if (!$product)
             return redirect('/home');
 
