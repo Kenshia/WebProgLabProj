@@ -18,7 +18,10 @@
 
                         @if (Auth::check() && Auth::user()->privilege == 'User')
                             <form action="/purchase" method="post">
-                                <input type="number" name="qty" id="qty">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="productId" value="{{ $product->id }}">
+                                <input type="number" name="qty" id="qty" min="0">
                                 <button type="submit">Purchase</button>
                             </form>
                         @endif
