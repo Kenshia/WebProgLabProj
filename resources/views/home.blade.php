@@ -17,10 +17,12 @@
 
                         @foreach ($category->products->take(10) as $item)
                             <div class="card" style="width: 20rem; height: 20rem; margin-left:1%; margin-right:1%">
-                                <img class="card-img-top" src="{{ $item->image }}" alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text"> {{ $item->detail }}</p>
-                                </div>
+                                <a href="/product/{{ $item->id }}" style="text-decoration: none; color:black">
+                                    <img class="card-img-top" src="{{ $item->image }}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text"> {{ $item->name }}</p>
+                                    </div>
+                                </a>
                             </div>
                         @endforeach
 

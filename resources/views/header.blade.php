@@ -23,6 +23,9 @@
                 <div class="p-3 align-self-center">
                     Header Stuffs
                 </div>
+                <div class="p-3 align-self-center border rounded" style="width:30%">
+                    Search Bar
+                </div>
             </div>
             <div class="d-flex justify-content-end">
                 <div class="p-3 align-self-center">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +27,19 @@ class HomeController extends Controller
         return view('category', [
             'name' => $category->name,
             'items' => DB::table('products')->where('product_category_id', '=', $category->id)->paginate(10)
+        ]);
+    }
+
+    function product(Request $request)
+    {
+        $id = $request->route('id');
+
+        $product = Product::all()->where('id', '=', $id)->first();
+        if (!$product)
+            return redirect('/home');
+
+        return view('product', [
+            'product' => $product
         ]);
     }
 }

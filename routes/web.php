@@ -19,6 +19,8 @@ Route::get('/', [HomeController::class, 'home']);
 Route::get('/home', [HomeController::class, 'home']);
 Route::get('/category', [HomeController::class, 'category']);
 Route::get('/category/{name}', [HomeController::class, 'category']);
+Route::get('/product', [HomeController::class, 'product']);
+Route::get('/product/{id}', [HomeController::class, 'product']);
 
 Route::get('/register', [LoginController::class, 'getRegister']);
 Route::post('/register', [LoginController::class, 'postRegister']);
