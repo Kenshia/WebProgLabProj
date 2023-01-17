@@ -28,9 +28,12 @@ Route::get('/manage', [ProductController::class, 'manage']);
 Route::get('/addproduct', [ProductController::class, 'addproduct']);
 Route::get('/update', [ProductController::class, 'update']);
 Route::post('/purchase', [ProductController::class, 'purchase']);
+Route::get('/cart', [ProductController::class, 'cart']);
+Route::get('/history', [ProductController::class, 'history']);
 
 Route::get('/register', [LoginController::class, 'getRegister']);
 Route::post('/register', [LoginController::class, 'postRegister']);
 Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/login', [LoginController::class, 'getLogin']);
 Route::post('/login', [LoginController::class, 'postLogin']);
+Route::get('/profile', [LoginController::class, 'profile']);

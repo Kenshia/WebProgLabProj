@@ -72,4 +72,9 @@ class LoginController extends Controller
 
         return redirect('/login');
     }
+
+    function profile()
+    {
+        return view('profile');
+    }
 }

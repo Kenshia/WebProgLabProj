@@ -41,4 +41,14 @@ class ProductController extends Controller
     {
         return view('update');
     }
+
+    function cart()
+    {
+        return view('cart');
+    }
+
+    function history()
+    {
+        return view('history');
+    }
 }
