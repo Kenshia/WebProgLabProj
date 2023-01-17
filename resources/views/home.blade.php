@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header" style="text-align:left;">
                         {{ $category->name }}
-                        <a href="/category/{{ $category->name }}">
+                        <a href="/category/{{ $category->name }}" class="text-decoration-none">
                             View All
                         </a>
                     </div>

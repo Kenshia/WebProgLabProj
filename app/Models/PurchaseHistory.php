@@ -12,12 +12,16 @@ class PurchaseHistory extends Model
 
     protected $fillable = [
         'user_id',
-        'product_id',
-        'qty'
+        'date'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

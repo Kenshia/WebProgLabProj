@@ -29,9 +29,10 @@
             <div class="d-flex justify-content-end">
                 <div class="p-3 align-self-center">
                     @if (Auth::check())
-                        {{ Auth::user()->name }} | <a href="/logout" style="text-decoration: none">Logout</a>
+                        <a href="/profile" class="text-decoration-none text-dark"> {{ Auth::user()->name }} </a> | <a
+                            href="/logout" class="text-decoration-none text-secondary">Logout</a>
                     @else
-                        <a href="/login" style="text-decoration:none">Login</a>
+                        <a href="/login" class="text-decoration-none text-dark">Login</a>
                     @endif
                 </div>
                 <div class="p-3 align-self-center">
@@ -40,7 +41,8 @@
                             <a href="/manage" style="text-decoration: none; color:black">
                                 <button type="button" class="btn btn-secondary">Manage Product</button></a>
                         @else
-                            <a href="/cart">Cart</a>
+                            <a href="/cart" class="text-decoration-none text-dark">Cart</a> |
+                            <a href="/history" class="text-decoration-none text-dark">History</a>
                         @endif
 
                     @endif
