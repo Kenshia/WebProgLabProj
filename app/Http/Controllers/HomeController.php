@@ -42,4 +42,19 @@ class HomeController extends Controller
             'product' => $product
         ]);
     }
+
+    function search(Request $request)
+    {
+        $name = $request->route('name');
+        $result = Product::all()->where('name', 'LIKE', '%' . $name . '%');
+        //$result = DB::table('products')->where('name', 'LIKE', '%' . $name . '%');
+        ddd($name);
+        return view('search', [
+            'result' => $result
+        ]);
+    }
+
+    function getSearch()
+    {
+    }
 }

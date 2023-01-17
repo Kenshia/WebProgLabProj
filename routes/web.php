@@ -21,6 +21,8 @@ Route::get('/category', [HomeController::class, 'category']);
 Route::get('/category/{name}', [HomeController::class, 'category']);
 Route::get('/product', [HomeController::class, 'product']);
 Route::get('/product/{id}', [HomeController::class, 'product']);
+Route::get('/search', [HomeController::class, 'getSearch']);
+Route::post('/search', [HomeController::class, 'postSearch']);
 
 Route::get('/register', [LoginController::class, 'getRegister']);
 Route::post('/register', [LoginController::class, 'postRegister']);

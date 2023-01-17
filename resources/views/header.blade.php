@@ -20,11 +20,10 @@
                         <h2>Barbatos Shop</h2>
                     </a>
                 </div>
-                <div class="p-3 align-self-center">
-                    Header Stuffs
-                </div>
-                <div class="p-3 align-self-center border rounded" style="width:30%">
-                    Search Bar
+                <div class="d-flex justify-content-between p-3 align-self-center" style="width:max">
+                    <form class="form-inline" action="/search" method="POST">
+                        <input class="form-control" type="search" placeholder="Search" name="name" id="name">
+                    </form>
                 </div>
             </div>
             <div class="d-flex justify-content-end">
