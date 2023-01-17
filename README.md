@@ -1,5 +1,3 @@
-A [Laravel](https://laravel.com) project for Web Programming Lab course Semester 5
-
 ## Steps to run the application
 - Clone the repository on your local storage
 ```
@@ -25,6 +23,10 @@ DB_DATABASE=barbatos_shop
 DB_USERNAME=root
 DB_PASSWORD=
 ```
+- Generate encryption key
+```
+php artisan key:generate
+```
 - Migrating and seeding initial data
 ```
 php artisan migrate --seed
@@ -37,9 +39,3 @@ php artisan storage:link
 ```
 php artisan serve
 ``` 
-
-## Completed Features
-	- None
-
-## TODO
-	- Everything
