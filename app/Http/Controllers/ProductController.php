@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\PurchaseHistory;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -46,7 +47,17 @@ class ProductController extends Controller
             'image' => 'mimes:jpeg,png'
         ]);
 
+        $imageName = (string)time() . '.' . $request->file('image')->extension();
 
+        Product::create([
+            'name' => $request->name,
+            'product_category_id' => ProductCategory::all()->where('name', '=', $request->category)->first()->id,
+            'detail' => $request->detail,
+            'price' => $request->price,
+            'image' => 'storage/' . $imageName
+        ]);
+
+        Storage::put('public/' . $imageName, file_get_contents($request->image));
 
         return redirect('/manage');
     }
