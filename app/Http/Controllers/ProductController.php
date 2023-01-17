@@ -109,6 +109,22 @@ class ProductController extends Controller
         ]);
     }
 
+    function adminSearch(Request $request)
+    {
+        $name = $request->name;
+
+        $products = Product::all(); // laravel doesn't have sql keyword LIKE and % doesn't work, wasted a lot of time there
+        $result = array();
+        foreach ($products as $product) {
+            if (strstr(strtolower($product->name), strtolower($name)))
+                array_push($result, $product);
+        }
+
+        return view('manage', [
+            'products' => $result
+        ]);
+    }
+
     function viewAddProduct()
     {
         return view('addproduct');

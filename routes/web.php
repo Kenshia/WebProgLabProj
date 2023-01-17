@@ -34,6 +34,8 @@ Route::middleware('admin')->group(function () {
         return redirect('/manage');
     });
 
+    Route::get('/manage/search', [ProductController::class, 'adminSearch']);
+
     Route::get('/manage/delete/{id}', [ProductController::class, 'delete']);
     Route::get('/manage/delete', function () {
         return redirect('/manage');
